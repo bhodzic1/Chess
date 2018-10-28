@@ -9,6 +9,7 @@ public class Board {
     }
 
     public boolean isCheck(ChessPiece.Color white) {
+
         return false;
     }
 

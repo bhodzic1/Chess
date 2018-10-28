@@ -24,7 +24,7 @@ public class Rook extends ChessPiece{
         }
     }
     @Override
-    public void move(String pozicija) throws IllegalChessMoveException {
+    public void move(String pozicija) throws IllegalChessMoveException, IllegalArgumentException {
         if(pozicija == "") throw new IllegalArgumentException("Netačna pozicija!");
         int temp1 = pozicija.charAt(0);
         int temp2 = pozicija.charAt(1);
@@ -38,6 +38,7 @@ public class Rook extends ChessPiece{
         else if(temp2 == temp4) {
             position = pozicija; //pomjeranje po istom broju
         }
+        else throw new IllegalChessMoveException("Netačna pozicija!");
     }
     @Override
     public Color getColor(){

@@ -6,6 +6,6 @@ public abstract class ChessPiece {
     abstract String getPosition();
     abstract Color getColor();
     void move(String pozicija) throws IllegalChessMoveException{
-        position = pozicija;
+        this.position = pozicija;
     };
 }
