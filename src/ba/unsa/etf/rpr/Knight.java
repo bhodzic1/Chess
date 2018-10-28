@@ -8,7 +8,7 @@ public class Knight {
         this.colorKnight = boja;
     }
 
-    public void move(String pozicija) throws IllegalArgumentsException {
+    public void move(String pozicija) throws Exception {
         //if(pozicija.charAt(0) < 'A' || pozicija.charAt(1) > 'H') throw new IllegalArgumentsException("Netačna pozicija!");
         //if(Math.abs(pozicija.charAt(0) - this.position.charAt(0)) > '1' || Math.abs(pozicija.charAt(1) - this.position.charAt(1) > 1)) throw new IllegalChessMoveException("Nemoguć potez!");
         positionKnight = pozicija;

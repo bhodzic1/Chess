@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public class Pawn implements ChessPiece{
+public class Pawn extends ChessPiece{
     private String position;
     ChessPiece.Color colorPawn;
 
@@ -19,7 +19,7 @@ public class Pawn implements ChessPiece{
     }
 
     @Override
-    public void move(String pozicija) throws IllegalArgumentsException {
+    public void move(String pozicija) throws IllegalChessMoveException {
 
     }
 }

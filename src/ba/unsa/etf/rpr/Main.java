@@ -35,5 +35,6 @@ public class Main {
                 "ispravno imenovanje paketa, klasa, metoda i promjenljivih,\n" +
                 "primjenu komentara,\n" +
                 "atomic commits.\n");
+
     }
 }

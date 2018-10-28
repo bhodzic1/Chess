@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public class Bishop implements ChessPiece {
+public class Bishop extends ChessPiece {
     private String position;
     ChessPiece.Color colorBishop;
     @Override
@@ -14,7 +14,7 @@ public class Bishop implements ChessPiece {
     }
 
     @Override
-    public void move(String pozicija) throws IllegalArgumentsException {
+    public void move(String pozicija) throws IllegalChessMoveException {
 
     }
 }

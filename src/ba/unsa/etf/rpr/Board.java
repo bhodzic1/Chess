@@ -2,9 +2,9 @@ package ba.unsa.etf.rpr;
 
 public class Board {
     private King whiteKing, blackKing;
-    public Board(){
-        whiteKing = new King("E1", ChessPiece.Color.WHITE);
-        blackKing = new King("E8", ChessPiece.Color.BLACK);
+    public Board() {
+            whiteKing = new King("E1", ChessPiece.Color.WHITE);
+            blackKing = new King("E8", ChessPiece.Color.BLACK);
 
     }
 
