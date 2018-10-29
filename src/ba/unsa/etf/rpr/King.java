@@ -10,15 +10,26 @@ public class King extends ChessPiece{
 
 
 
-    public King(String pozicija, ChessPiece.Color bojaFigure) {
+    public King(String pozicija, ChessPiece.Color boja) {
         if(pozicija == "") throw new IllegalArgumentException("Netačna pozicija!");
         int temp1 = pozicija.charAt(0);
         int temp2 = pozicija.charAt(1);
         if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-
-        position = pozicija;
-        colorKing = bojaFigure;
+        if(boja == Color.WHITE){
+            if(temp1 == 69 && temp2 == 49){
+                position = pozicija;
+                colorKing = boja;
+            }
+            else throw new IllegalArgumentException("Netačna pozicija!");
+        }
+        if(boja == Color.BLACK){
+            if(temp1 == 69 && temp2 == 56){
+                position = pozicija;
+                colorKing = boja;
+            }
+            else throw new IllegalArgumentException("Netačna pozicija!");
+        }
     }
     public void move(String pozicija) throws IllegalChessMoveException, IllegalArgumentException {
         if(pozicija == "") throw new IllegalArgumentException("Netačna pozicija!");
@@ -28,9 +39,30 @@ public class King extends ChessPiece{
         int temp4 = this.position.charAt(1);
         if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-        if(Math.abs(temp3 - temp1) > 1) throw new IllegalChessMoveException("Netačna pozicija!");
-        else if(Math.abs(temp4 - temp2) > 1)  throw new IllegalChessMoveException("Netačna pozicija!");
-        position = pozicija;
+        if(colorKing == Color.WHITE){
+            if(temp1 == temp3 && Math.abs(temp2 - temp4) == 1){
+                position = pozicija;
+            }
+            else if(temp2 == temp4 && Math.abs(temp1 - temp3) == 1){
+                position = pozicija;
+            }
+            else if(Math.abs(temp1 - temp3) == 1 && Math.abs(temp2 - temp4) == 1){
+                position = pozicija;
+            }
+            else throw new IllegalChessMoveException("Netačna pozicija!");
+        }
+        if(colorKing == Color.BLACK){
+            if(temp1 == temp3 && Math.abs(temp2 - temp4) == 1){
+                position = pozicija;
+            }
+            else if(temp2 == temp4 && Math.abs(temp1 - temp3) == 1){
+                position = pozicija;
+            }
+            else if(Math.abs(temp1 - temp3) == 1 && Math.abs(temp2 - temp4) == 1){
+                position = pozicija;
+            }
+            else throw new IllegalChessMoveException("Netačna pozicija!");
+        }
 
     }
     public Color getColor(){
