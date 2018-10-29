@@ -55,7 +55,7 @@ public class Pawn extends ChessPiece{
             else if ((temp1 - temp3 == 1 || temp1 - temp3 == -1) && temp2 - temp4 == 1) {
                 position = pozicija;
             }
-            else throw new IllegalArgumentException("Netačna pozicija!");
+            else throw new IllegalChessMoveException("Netačna pozicija!");
         }
         if(colorPawn == Color.BLACK){
             if(temp1 == temp3 && temp2 == 55 && temp4 == 53){
@@ -67,7 +67,7 @@ public class Pawn extends ChessPiece{
             else if ((temp1 - temp3 == 1 || temp1 - temp3 == -1) && temp4 - temp2 == 1) {
                 position = pozicija;
             }
-            else throw new IllegalArgumentException("Netačna pozicija!");
+            else throw new IllegalChessMoveException("Netačna pozicija!");
         }
     }
 }
