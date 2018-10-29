@@ -5,7 +5,7 @@ public abstract class ChessPiece {
     public static enum Color { BLACK, WHITE};
     abstract String getPosition();
     abstract Color getColor();
-    void move(String pozicija) throws IllegalChessMoveException{
+    void move(String pozicija) throws IllegalChessMoveException, IllegalArgumentException {
         this.position = pozicija;
     };
 }

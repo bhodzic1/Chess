@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import java.lang.Math;
+
 public class Bishop extends ChessPiece {
     private String position;
     ChessPiece.Color colorBishop;
@@ -45,7 +47,7 @@ public class Bishop extends ChessPiece {
         if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
         if(colorBishop == Color.WHITE){
-            if(temp1 - temp3 == temp2 - temp4){
+            if(Math.abs(temp1 - temp3) == Math.abs(temp2 - temp4)){
                 position = pozicija;
             }
             else throw new IllegalChessMoveException("Netačna pozicija!");
