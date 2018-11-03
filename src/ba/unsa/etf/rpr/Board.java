@@ -118,20 +118,24 @@ public class Board {
 
     }
 
-    public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException{
+    public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException, NullPointerException{
+        int temp1 = oldPosition.charAt(0);
+        int temp2 = oldPosition.charAt(1);
+        int temp3 = newPosition.charAt(0);
+        int temp4 = newPosition.charAt(1);
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 8; j++){
-                if(tabla[i][j].getPosition().equals(oldPosition)){
-                    for(int k = 0; k < 4; k++){
-                        for(int h = 0; h < 8; h++) {
-                            if (!tabla[k][h].equals(null)){
-                                if (tabla[k][h].getPosition().equals(newPosition)) {
-                                    tabla[k][h] = null;
-                                }
-                            }
-                        }
-                    }
-                    tabla[i][j].move(newPosition);
+                if (tabla[i][j] != null) {
+                    if (tabla[i][j].getPosition().equals(newPosition))
+                        tabla[i][j] = null;
+                }
+            }
+        }
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 8; j++){
+                if(tabla[i][j] != null) {
+                    if (tabla[i][j].getPosition().equals(oldPosition))
+                        tabla[i][j].move(newPosition);
                 }
             }
         }
