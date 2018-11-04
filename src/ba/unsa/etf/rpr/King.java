@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr;
 
 import java.lang.Math;
 import java.lang.RuntimeException;
-import java.io.*;
+
 
 public class King extends ChessPiece{
     private String position;

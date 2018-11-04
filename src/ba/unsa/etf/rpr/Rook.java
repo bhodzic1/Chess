@@ -10,18 +10,11 @@ public class Rook extends ChessPiece{
         int temp2 = pozicija.charAt(1);
         if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-        if(boja == Color.WHITE) {
-            if ((temp1 == 65 || temp1 == 72) && temp2 == 49) {
-                position = pozicija;
-                colorRook = boja;
-            } else throw new IllegalArgumentException("Netačna pozicija!");
-        }
-        if(boja == Color.BLACK) {
-            if ((temp1 == 65 || temp1 == 72) && temp2 == 56) {
-                position = pozicija;
-                colorRook = boja;
-            } else throw new IllegalArgumentException("Netačna pozicija!");
-        }
+
+        position = pozicija;
+        colorRook = boja;
+
+
     }
     @Override
     public void move(String pozicija) throws IllegalChessMoveException, IllegalArgumentException {
@@ -30,8 +23,12 @@ public class Rook extends ChessPiece{
         int temp2 = pozicija.charAt(1);
         int temp3 = position.charAt(0);
         int temp4 = position.charAt(1);
+        String pomocni1 = new String();
+        pomocni1 = pozicija.substring(1,2);
+        System.out.println(pomocni1);
         if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
+
         if(temp1 == temp3){
             position = pozicija; //pomjeranje po istom slovu
         }

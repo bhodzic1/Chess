@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr;
 
 public class Board {
-    protected ChessPiece[][] tabla = new ChessPiece[4][8];
+    public static ChessPiece[][] tabla = new ChessPiece[8][8];
 
     public Board() {
         for(int i = 0; i < 8; i++){
@@ -9,13 +9,13 @@ public class Board {
                 if(i == 0 && j == 4){
                     tabla[i][j] = new King("E8", ChessPiece.Color.BLACK);
                 }
-                else if(i == 3 && j == 4){
+                else if(i == 7 && j == 4){
                     tabla[i][j] = new King("E1", ChessPiece.Color.WHITE);
                 }
                 else if(i == 0 && j == 3){
                     tabla[i][j] = new Queen("D8", ChessPiece.Color.BLACK);
                 }
-                else if(i == 3 && j == 3){
+                else if(i == 7 && j == 3){
                     tabla[i][j] = new Queen("D1", ChessPiece.Color.WHITE);
                 }
                 else if(i == 0 && j == 0){
@@ -60,48 +60,49 @@ public class Board {
                 else if(i == 1 && j == 7){
                     tabla[i][j] = new Pawn("H7", ChessPiece.Color.BLACK);
                 }
-                else if(i == 2 && j == 0){
+                else if(i == 6 && j == 0){
                     tabla[i][j] = new Pawn("A2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 1){
+                else if(i == 6 && j == 1){
                     tabla[i][j] = new Pawn("B2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 2){
+                else if(i == 6 && j == 2){
                     tabla[i][j] = new Pawn("C2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 3){
+                else if(i == 6 && j == 3){
                     tabla[i][j] = new Pawn("D2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 4){
+                else if(i == 6 && j == 4){
                     tabla[i][j] = new Pawn("E2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 5){
+                else if(i == 6 && j == 5){
                     tabla[i][j] = new Pawn("F2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 6){
+                else if(i == 6 && j == 6){
                     tabla[i][j] = new Pawn("G2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 2 && j == 7){
+                else if(i == 6 && j == 7){
                     tabla[i][j] = new Pawn("H2", ChessPiece.Color.WHITE);
                 }
-                else if(i == 3 && j == 0){
+                else if(i == 7 && j == 0){
                     tabla[i][j] = new Rook("A1", ChessPiece.Color.WHITE);
                 }
-                else if(i == 3 && j == 1){
+                else if(i == 7 && j == 1){
                     tabla[i][j] = new Knight("B1", ChessPiece.Color.WHITE);
                 }
-                else if(i == 3 && j == 2){
+                else if(i == 7 && j == 2){
                     tabla[i][j] = new Bishop("C1", ChessPiece.Color.WHITE);
                 }
-                else if(i == 3 && j == 5){
+                else if(i == 7 && j == 5){
                     tabla[i][j] = new Bishop("F1", ChessPiece.Color.WHITE);
                 }
-                else if(i == 3 && j == 6){
+                else if(i == 7 && j == 6){
                     tabla[i][j] = new Knight("G1", ChessPiece.Color.WHITE);
                 }
-                else if(i == 3 && j == 7){
+                else if(i == 7 && j == 7){
                     tabla[i][j] = new Rook("H1", ChessPiece.Color.WHITE);
                 }
+                else tabla[i][j] = null;
             }
         }
 
@@ -118,24 +119,33 @@ public class Board {
 
     }
 
-    public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException, NullPointerException{
-        int temp1 = oldPosition.charAt(0);
-        int temp2 = oldPosition.charAt(1);
-        int temp3 = newPosition.charAt(0);
-        int temp4 = newPosition.charAt(1);
+    public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException{
+
+        int pomocniRed = 0, pomocnaKolona = 0;
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 8; j++){
                 if (tabla[i][j] != null) {
-                    if (tabla[i][j].getPosition().equals(newPosition))
-                        tabla[i][j] = null;
+                    if (tabla[i][j].getPosition().equals(newPosition)) {
+                        //tabla[i][j] = null;
+                        pomocniRed = i;
+                        pomocnaKolona = j;
+                    }
                 }
             }
         }
-        for(int i = 0; i < 4; i++){
+        /*System.out.println(pomocniRed);
+        System.out.println(pomocnaKolona);*/
+        for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 if(tabla[i][j] != null) {
-                    if (tabla[i][j].getPosition().equals(oldPosition))
-                        tabla[i][j].move(newPosition);
+                    if (tabla[i][j].getPosition().equals(oldPosition)) {
+                        for(int k = i; k < pomocniRed; k++) {
+                            if (tabla[k][pomocnaKolona] != null){
+                                throw new IllegalChessMoveException("Netačna pozicija");
+                            }
+                        }
+                        //tabla[i][j].move(newPosition);
+                    }
                 }
             }
         }
