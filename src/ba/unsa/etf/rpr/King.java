@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr;
 
 import java.lang.Math;
 import java.lang.RuntimeException;
-
+import java.io.*;
 
 public class King extends ChessPiece{
     private String position;
@@ -16,20 +16,9 @@ public class King extends ChessPiece{
         int temp2 = pozicija.charAt(1);
         if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-        if(boja == Color.WHITE){
-            if(temp1 == 69 && temp2 == 49){
-                position = pozicija;
-                colorKing = boja;
-            }
-            else throw new IllegalArgumentException("Netačna pozicija!");
-        }
-        if(boja == Color.BLACK){
-            if(temp1 == 69 && temp2 == 56){
-                position = pozicija;
-                colorKing = boja;
-            }
-            else throw new IllegalArgumentException("Netačna pozicija!");
-        }
+
+        position = pozicija;
+        colorKing = boja;
     }
     public void move(String pozicija) throws IllegalChessMoveException, IllegalArgumentException {
         if(pozicija == "") throw new IllegalArgumentException("Netačna pozicija!");
@@ -37,8 +26,10 @@ public class King extends ChessPiece{
         int temp2 = pozicija.charAt(1);
         int temp3 = this.position.charAt(0);
         int temp4 = this.position.charAt(1);
-        if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
+        if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
+        if (temp1 >= 97 && temp1 <= 104)
+            temp1 -= 32;
         if(colorKing == Color.WHITE){
             if(temp1 == temp3 && Math.abs(temp2 - temp4) == 1){
                 position = pozicija;
