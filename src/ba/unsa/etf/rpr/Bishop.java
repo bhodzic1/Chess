@@ -9,22 +9,11 @@ public class Bishop extends ChessPiece {
         if(pozicija == "") throw new IllegalArgumentException("Netačna pozicija");
         int temp1 = pozicija.charAt(0);
         int temp2 = pozicija.charAt(1);
-        if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
+        if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-        if(boja == Color.WHITE){
-            if(temp2 == 49 && (temp1 == 67 || temp1 == 70)){
-                position = pozicija;
-                colorBishop = boja;
-            }
-            else throw new IllegalArgumentException("Netačna pozicija!");
-        }
-        if(boja == Color.BLACK){
-            if(temp2 == 56 && (temp1 == 67 || temp1 == 70)){
-                position = pozicija;
-                colorBishop = boja;
-            }
-            else throw new IllegalArgumentException("Netačna pozicija!");
-        }
+
+        position = pozicija;
+        colorBishop = boja;
 
     }
     @Override
@@ -44,7 +33,7 @@ public class Bishop extends ChessPiece {
         int temp2 = pozicija.charAt(1);
         int temp3 = position.charAt(0);
         int temp4 = position.charAt(1);
-        if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
+        if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
         if(colorBishop == Color.WHITE){
             if(Math.abs(temp1 - temp3) == Math.abs(temp2 - temp4)){
@@ -53,7 +42,7 @@ public class Bishop extends ChessPiece {
             else throw new IllegalChessMoveException("Netačna pozicija!");
         }
         if(colorBishop == Color.BLACK){
-            if(temp1 - temp3 == temp2 - temp4){
+            if(Math.abs(temp1 - temp3) == Math.abs(temp2 - temp4)){
                 position = pozicija;
             }
             else throw new IllegalChessMoveException("Netačna pozicija!");
