@@ -58,24 +58,36 @@ public class Board {
             int temp1 = oldPosition.charAt(1);
             int temp2 = newPosition.charAt(1);
             int temp3 = oldPosition.charAt(0);
-            while(Math.abs(temp2 - temp1) != 0){
-                pomocni = Integer.toString(temp3);
-                //pomocni += Integer.toString(temp1);
-                if(temp2 > temp1)
-                    pomocni += Integer.toString(temp1);
-                else pomocni += Integer.toString(temp2);
-                System.out.println(pomocni);
-                List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
-                Iterator<ChessPiece> it = lista.iterator();
-                while(it.hasNext()){
-                    ChessPiece c = it.next();
-                    if(c.getPosition() == pomocni)
-                        return false;
-                }
+            int temp4 = oldPosition.charAt(1);
+            int temp5 = newPosition.charAt(1);
+            temp5++;
+            temp1++;
+            char pom1 = (char) temp3;
+            char pom2 = (char) temp1;
+            char pom5 = (char) temp5;
+            if(temp2 > temp1) {
+                while (temp2 > temp1) {
+                    pomocni += Character.toString(pom1);
+                    pomocni += Character.toString(pom2);
+                    for(ChessPiece c : lista){
+                        if(c.getPosition().equals(pomocni))
+                            return false;
+                    }
 
-                if(temp2 > temp1)
-                    temp2--;
-                else temp1--;
+                    temp1++;
+                }
+            }
+            else {
+                while (temp4 > temp5) {
+                    pomocni += Character.toString(pom1);
+                    pomocni += Character.toString(pom5);
+                    for(ChessPiece c : lista){
+                        if(c.getPosition().equals(pomocni))
+                            return false;
+                    }
+
+                    temp5++;
+                }
             }
         }
         return true;
@@ -114,24 +126,28 @@ public class Board {
     public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException{
         List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
         Iterator<ChessPiece> it = lista.iterator();
-        while(it.hasNext()){
-            ChessPiece c = it.next();
-            if(c.getPosition().equals(oldPosition)){
-                if(jeLiPutSlobodan(oldPosition, newPosition)) {
-                    if (jeLiPozicijaZauzeta(newPosition)) {
-                        Iterator<ChessPiece> iterator = lista.iterator();
-                        while (iterator.hasNext()) {
-                            ChessPiece d = iterator.next();
-                            if (d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
-                                lista.remove(d);
+        if(jeLiPutSlobodan(oldPosition, newPosition)) {
+            while(it.hasNext()){
+                ChessPiece c = it.next();
+
+                    if(c.getPosition().equals(oldPosition)){
+
+                        if (jeLiPozicijaZauzeta(newPosition)) {
+                            Iterator<ChessPiece> iterator = lista.iterator();
+                            while (iterator.hasNext()) {
+                                ChessPiece d = iterator.next();
+                                if (d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
+                                    lista.remove(d);
+                                }
                             }
                         }
+                        c.move(newPosition);
                     }
-                    c.move(newPosition);
+
                 }
-                else throw new IllegalChessMoveException("Netačna pozicija!");
+
             }
-        }
+        else throw new IllegalChessMoveException("Netačna pozicija!");
 
     }
 }
