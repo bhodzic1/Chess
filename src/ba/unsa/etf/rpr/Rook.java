@@ -8,7 +8,7 @@ public class Rook extends ChessPiece{
         if(pozicija == "") throw new IllegalArgumentException("Netačna pozicija!");
         int temp1 = pozicija.charAt(0);
         int temp2 = pozicija.charAt(1);
-        if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
+        if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
 
         position = pozicija;
@@ -26,7 +26,7 @@ public class Rook extends ChessPiece{
         String pomocni1 = new String();
         pomocni1 = pozicija.substring(1,2);
         System.out.println(pomocni1);
-        if (temp1 < 65 || temp1 > 72) throw new IllegalArgumentException("Netačna pozicija!");
+        if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
 
         if(temp1 == temp3){

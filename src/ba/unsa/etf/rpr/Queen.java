@@ -10,7 +10,6 @@ public class Queen extends ChessPiece{
         int temp2 = pozicija.charAt(1);
         if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-
         this.position = pozicija;
         this.colorQueen = boja;
     }
