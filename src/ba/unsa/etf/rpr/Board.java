@@ -182,10 +182,23 @@ public class Board {
     }
 
     public boolean isCheck(ChessPiece.Color boja) {
-
+        String pomocni = new String("");
         for(ChessPiece c : lista){
-
+            if(c instanceof King && c.getColor().equals(boja)){
+                pomocni = c.getPosition();
+            }
         }
+
+        int brojac = 0;
+        String pomocni2 = new String("");
+        char temp1 = pomocni.charAt(0);
+        char pom1 = pomocni.charAt(1);
+        pom1--;
+        pomocni2 += temp1;
+        pomocni2 += pom1;
+        /*while(jeLiPutSlobodan(pomocni, pomocni2)){
+
+        }*/
 
         return true;
     }
