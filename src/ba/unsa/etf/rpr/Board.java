@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Board {
 
@@ -62,11 +63,15 @@ public class Board {
     }
 
     public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException{
-
-        for(ChessPiece c : lista){
+        List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
+        Iterator<ChessPiece> it = lista.iterator();
+        while(it.hasNext()){
+            ChessPiece c = it.next();
             if(c.getPosition().equals(oldPosition)){
                 if(jeLiPozicijaZauzeta(newPosition)){
-                    for(ChessPiece d : lista){
+                    Iterator<ChessPiece> iterator = lista.iterator();
+                    while(iterator.hasNext()){
+                        ChessPiece d = iterator.next();
                         if(d.getPosition().equals(newPosition)) {
                             lista.remove(d);
                         }
