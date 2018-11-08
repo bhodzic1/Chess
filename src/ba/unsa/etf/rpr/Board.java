@@ -53,7 +53,31 @@ public class Board {
     }
 
     public boolean jeLiPutSlobodan(String oldPosition, String newPosition){
+        String pomocni = new String("");
+        if(oldPosition.charAt(0) == newPosition.charAt(0)){
+            int temp1 = oldPosition.charAt(1);
+            int temp2 = newPosition.charAt(1);
+            int temp3 = oldPosition.charAt(0);
+            while(Math.abs(temp2 - temp1) != 0){
+                pomocni = Integer.toString(temp3);
+                //pomocni += Integer.toString(temp1);
+                if(temp2 > temp1)
+                    pomocni += Integer.toString(temp1);
+                else pomocni += Integer.toString(temp2);
+                System.out.println(pomocni);
+                List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
+                Iterator<ChessPiece> it = lista.iterator();
+                while(it.hasNext()){
+                    ChessPiece c = it.next();
+                    if(c.getPosition() == pomocni)
+                        return false;
+                }
 
+                if(temp2 > temp1)
+                    temp2--;
+                else temp1--;
+            }
+        }
         return true;
     }
 
@@ -93,16 +117,19 @@ public class Board {
         while(it.hasNext()){
             ChessPiece c = it.next();
             if(c.getPosition().equals(oldPosition)){
-                if(jeLiPozicijaZauzeta(newPosition)){
-                    Iterator<ChessPiece> iterator = lista.iterator();
-                    while(iterator.hasNext()){
-                        ChessPiece d = iterator.next();
-                        if(d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
-                            lista.remove(d);
+                if(jeLiPutSlobodan(oldPosition, newPosition)) {
+                    if (jeLiPozicijaZauzeta(newPosition)) {
+                        Iterator<ChessPiece> iterator = lista.iterator();
+                        while (iterator.hasNext()) {
+                            ChessPiece d = iterator.next();
+                            if (d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
+                                lista.remove(d);
+                            }
                         }
                     }
+                    c.move(newPosition);
                 }
-                c.move(newPosition);
+                else throw new IllegalChessMoveException("Netačna pozicija!");
             }
         }
 
