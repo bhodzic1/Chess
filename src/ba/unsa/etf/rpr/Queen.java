@@ -27,12 +27,12 @@ public class Queen extends ChessPiece{
     }
 
     @Override
-    String getPosition() {
+    public String getPosition() {
         return position;
     }
 
     @Override
-    Color getColor() {
+    public Color getColor() {
         return colorQueen;
     }
 

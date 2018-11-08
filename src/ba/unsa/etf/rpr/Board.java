@@ -5,7 +5,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Board {
 
-    public ArrayList<ChessPiece> lista = new ArrayList<ChessPiece>();
+    //public List<ChessPiece> lista = new ArrayList<ChessPiece>();
+    public ArrayList<ChessPiece> lista = new ArrayList<>();
 
     public Board() {
 
@@ -145,7 +146,7 @@ public class Board {
                     staraPozicija2++;
                 }
             }
-            else /*if(novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2)*/{
+            else if(novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2){
                 staraPozicija1++;
                 staraPozicija2++;
                 char a1 = (char) staraPozicija1;
@@ -166,14 +167,9 @@ public class Board {
     }
 
     public boolean jeLiZaPojesti(String oldPosition, String newPosition){
-        List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
-        Iterator<ChessPiece> it = lista.iterator();
-        while(it.hasNext()){
-            ChessPiece c = it.next();
+        for(ChessPiece c : lista){
             if(c.getPosition().equals(oldPosition)){
-                Iterator<ChessPiece> iterator = lista.iterator();
-                while(iterator.hasNext()){
-                    ChessPiece d = iterator.next();
+                for(ChessPiece d : lista){
                     if(d.getPosition().equals(newPosition)){
                         if(c.getColor().equals(d.getColor())){
                             return false;
@@ -187,39 +183,45 @@ public class Board {
 
     public boolean isCheck(ChessPiece.Color boja) {
 
+        for(ChessPiece c : lista){
+
+        }
 
         return true;
     }
 
-    public void move(Class figura, ChessPiece.Color boja, String pozicija){
+    public void move(Class type, ChessPiece.Color boja, String pozicija){
+
 
     }
 
     public void move(String oldPosition, String newPosition) throws IllegalChessMoveException, IllegalArgumentException{
-        List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
-        Iterator<ChessPiece> it = lista.iterator();
+        List<ChessPiece> removeList = new ArrayList<>();
         if(jeLiPutSlobodan(oldPosition, newPosition)) {
-            while(it.hasNext()){
-                ChessPiece c = it.next();
+            for(ChessPiece c : lista){
+                if(c.getPosition().equals(oldPosition)){
+                    if (jeLiPozicijaZauzeta(newPosition)) {
 
-                    if(c.getPosition().equals(oldPosition)){
-
-                        if (jeLiPozicijaZauzeta(newPosition)) {
-                            Iterator<ChessPiece> iterator = lista.iterator();
-                            while (iterator.hasNext()) {
-                                ChessPiece d = iterator.next();
-                                if (d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
-                                    lista.remove(d);
-                                }
+                        for(ChessPiece d : lista){
+                            if (d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
+                                removeList.add(d);
                             }
                         }
-                        c.move(newPosition);
-                    }
 
+                    }
+                    c.move(newPosition);
                 }
 
             }
+
+        }
         else throw new IllegalChessMoveException("Netačna pozicija!");
+        lista.removeAll(removeList);
+        /*for(ChessPiece c : lista){
+            if(c.getPosition().equals(oldPosition)){
+                c.move(newPosition);
+            }
+        }*/
 
     }
 }

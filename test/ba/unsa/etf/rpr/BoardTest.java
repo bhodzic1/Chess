@@ -100,6 +100,46 @@ class BoardTest {
     // Same test with other move method
 
     @Test
+        // No check
+    void isCheck2() {
+        Board b = new Board();
+        try {
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "C8");
+            b.move(Queen.class, ChessPiece.Color.WHITE, "E2");
+        } catch(Exception e) {
+            // Do nothing
+        }
+        assertFalse(b.isCheck(ChessPiece.Color.BLACK));
+    }
+
+    @Test
+        // Check by queen
+    void isCheck3() {
+        Board b = new Board();
+        try {
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "C8");
+            b.move(Queen.class, ChessPiece.Color.WHITE, "E2");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F4");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F5");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F6");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E7");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F8");
+        } catch(Exception e) {
+            // Do nothing
+        }
+        assertTrue(b.isCheck(ChessPiece.Color.BLACK));
+    }
+
+
+    @Test
     // Is the board usable after isCheck
     void someLegalMoves1() {
         Board b = new Board();
@@ -114,6 +154,46 @@ class BoardTest {
                 }
         );
     }
+
+    @Test
+        // No check
+    void isCheck12() {
+        Board b = new Board();
+        try {
+            b.move("E2", "E4");
+            b.move("E4", "E5");
+            b.move("E5", "E6");
+            b.move("E6", "D7");
+            b.move("D7", "C8");
+            b.move("D1", "E2");
+        } catch(Exception e) {
+            // Do nothing
+        }
+        assertFalse(b.isCheck(ChessPiece.Color.BLACK));
+    }
+
+    @Test
+        // Check by queen
+    void isCheck13() {
+        Board b = new Board();
+        try {
+            b.move("E2", "E4");
+            b.move("E4", "E5");
+            b.move("E5", "E6");
+            b.move("E6", "D7");
+            b.move("D7", "C8");
+            b.move("D1", "E2");
+            b.move("F2", "F4");
+            b.move("F4", "F5");
+            b.move("F5", "F6");
+            b.move("F6", "E7");
+            b.move("E7", "F8");
+        } catch(Exception e) {
+            // Do nothing
+        }
+        assertTrue(b.isCheck(ChessPiece.Color.BLACK));
+    }
+
 
     @Test
     // Pawn eats diagonally, check by queen
