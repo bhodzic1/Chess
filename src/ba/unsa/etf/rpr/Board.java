@@ -129,6 +129,38 @@ public class Board {
                     staraPozicija2--;
                 }
             }
+            else if(novaPozicija1 < staraPozicija1 && novaPozicija2 > staraPozicija2){
+                staraPozicija1--;
+                staraPozicija2++;
+                char a1 = (char) staraPozicija1;
+                char a2 = (char) staraPozicija2;
+                while(novaPozicija1 < staraPozicija1 && novaPozicija2 > staraPozicija2){
+                    pomocni += Character.toString(a1);
+                    pomocni += Character.toString(a2);
+                    for(ChessPiece c : lista){
+                        if(c.getPosition().equals(pomocni))
+                            return false;
+                    }
+                    staraPozicija1--;
+                    staraPozicija2++;
+                }
+            }
+            else /*if(novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2)*/{
+                staraPozicija1++;
+                staraPozicija2++;
+                char a1 = (char) staraPozicija1;
+                char a2 = (char) staraPozicija2;
+                while(novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2){
+                    pomocni += Character.toString(a1);
+                    pomocni += Character.toString(a2);
+                    for(ChessPiece c : lista){
+                        if(c.getPosition().equals(pomocni))
+                            return false;
+                    }
+                    staraPozicija1++;
+                    staraPozicija2++;
+                }
+            }
         }
         return true;
     }
