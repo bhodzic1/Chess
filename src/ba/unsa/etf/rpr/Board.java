@@ -54,6 +54,11 @@ public class Board {
 
     public boolean jeLiPutSlobodan(String oldPosition, String newPosition){
         String pomocni = new String("");
+        int staraPozicija1 = oldPosition.charAt(0);
+        int staraPozicija2 = oldPosition.charAt(1);
+        int novaPozicija1 = newPosition.charAt(0);
+        int novaPozicija2 = newPosition.charAt(1);
+
         if(oldPosition.charAt(0) == newPosition.charAt(0)){
             int temp1 = oldPosition.charAt(1);
             int temp2 = newPosition.charAt(1);
@@ -87,6 +92,41 @@ public class Board {
                     }
 
                     temp5++;
+                }
+            }
+        }
+
+        else if(Math.abs(novaPozicija1 - staraPozicija1) == Math.abs(novaPozicija2 - staraPozicija2)){
+            if(novaPozicija1 > staraPozicija1 && novaPozicija2 < staraPozicija2){
+                staraPozicija1++;
+                staraPozicija2--;
+                char a1 = (char) staraPozicija1;
+                char a2 = (char) staraPozicija2;
+                while(novaPozicija1 > staraPozicija1 && novaPozicija2 < staraPozicija2){
+                    pomocni += Character.toString(a1);
+                    pomocni += Character.toString(a2);
+                    for(ChessPiece c : lista){
+                        if(c.getPosition().equals(pomocni))
+                            return false;
+                    }
+                    staraPozicija1++;
+                    staraPozicija2--;
+                }
+            }
+            else if(novaPozicija1 < staraPozicija1 && novaPozicija2 < staraPozicija2){
+                staraPozicija1--;
+                staraPozicija2--;
+                char a1 = (char) staraPozicija1;
+                char a2 = (char) staraPozicija2;
+                while(novaPozicija1 < staraPozicija1 && novaPozicija2 < staraPozicija2){
+                    pomocni += Character.toString(a1);
+                    pomocni += Character.toString(a2);
+                    for(ChessPiece c : lista){
+                        if(c.getPosition().equals(pomocni))
+                            return false;
+                    }
+                    staraPozicija1--;
+                    staraPozicija2--;
                 }
             }
         }
