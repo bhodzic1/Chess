@@ -19,7 +19,13 @@ public class Knight extends ChessPiece {
         int temp2 = pozicija.charAt(1);
         int temp3 = positionKnight.charAt(0);
         int temp4 = positionKnight.charAt(1);
-        positionKnight = pozicija;
+        if(Math.abs(temp1 - temp3) == 1 && Math.abs(temp2 - temp4) == 2){
+            positionKnight = pozicija;
+        }
+        else if(Math.abs(temp1 - temp3) == 2 && Math.abs(temp2 - temp4) == 1){
+            positionKnight = pozicija;
+        }
+        else throw new IllegalChessMoveException("Netačna pozicija!");
 
     }
     @Override
