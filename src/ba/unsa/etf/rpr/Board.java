@@ -52,6 +52,31 @@ public class Board {
         return false;
     }
 
+    public boolean jeLiPutSlobodan(String oldPosition, String newPosition){
+
+        return true;
+    }
+
+    public boolean jeLiZaPojesti(String oldPosition, String newPosition){
+        List<ChessPiece> lista = new CopyOnWriteArrayList<ChessPiece>();
+        Iterator<ChessPiece> it = lista.iterator();
+        while(it.hasNext()){
+            ChessPiece c = it.next();
+            if(c.getPosition().equals(oldPosition)){
+                Iterator<ChessPiece> iterator = lista.iterator();
+                while(iterator.hasNext()){
+                    ChessPiece d = iterator.next();
+                    if(d.getPosition().equals(newPosition)){
+                        if(c.getColor().equals(d.getColor())){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean isCheck(ChessPiece.Color boja) {
 
 
@@ -72,7 +97,7 @@ public class Board {
                     Iterator<ChessPiece> iterator = lista.iterator();
                     while(iterator.hasNext()){
                         ChessPiece d = iterator.next();
-                        if(d.getPosition().equals(newPosition)) {
+                        if(d.getPosition().equals(newPosition) && jeLiZaPojesti(oldPosition, newPosition)) {
                             lista.remove(d);
                         }
                     }
