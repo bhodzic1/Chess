@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Board {
 
@@ -210,23 +209,46 @@ public class Board {
                 pomocni = c.getPosition();
             }
         }
+        String position2 = "";
+        King king = new King(pomocni, boja);
+        for (ChessPiece c : lista) {
+            if (c.getColor() != boja && !(c instanceof Pawn)) {
+                position2 = c.getPosition();
+                try {
+                    c.move(pomocni);
+                } catch (IllegalChessMoveException e) {
+                    continue;
+                }
+                if (!lista.contains(king)) {
+                    lista.add(king);
+                    try {
+                        c.move(position2);
+                    } catch (IllegalChessMoveException e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                }
+            } else if (c.getColor() != boja && (c instanceof Pawn)) {
+                position2 = c.getPosition();
+                try {
+                    Pawn c2 = (Pawn) c.clone();
+                    try {
+                        c2.move(pomocni);
 
-        for (ChessPiece chessPiece : lista) {
-
+                    } catch (IllegalChessMoveException e) {
+                        continue;
+                    }
+                    if (!lista.contains(king)) {
+                        lista.add(king);
+                        return true;
+                    }
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        int brojac = 0;
-        String pomocni2 = new String("");
-        char temp1 = pomocni.charAt(0);
-        char pom1 = pomocni.charAt(1);
-        pom1--;
-        pomocni2 += temp1;
-        pomocni2 += pom1;
-        /*while(jeLiPutSlobodan(pomocni, pomocni2)){
-
-        }*/
-
-        return true;
+        return false;
     }
 
     public void move(Class type, ChessPiece.Color boja, String pozicija) throws IllegalChessMoveException {

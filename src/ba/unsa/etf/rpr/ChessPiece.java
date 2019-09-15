@@ -6,5 +6,8 @@ public abstract class ChessPiece {
     public abstract String getPosition();
     public abstract Color getColor();
     public abstract void move(String pozicija) throws IllegalChessMoveException, IllegalArgumentException;
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
 
 }

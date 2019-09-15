@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public class Pawn extends ChessPiece{
+public class Pawn extends ChessPiece implements Cloneable{
     private String position;
     ChessPiece.Color colorPawn;
 
