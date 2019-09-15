@@ -33,7 +33,7 @@ public class Pawn extends ChessPiece{
         int temp4 = position.charAt(1);
         if (temp1 < 65 || (temp1 > 72 && temp1 < 97) || temp1 > 104) throw new IllegalArgumentException("Netačna pozicija!");
         if (temp2 < 49 || temp2 > 56) throw new IllegalArgumentException("Netačna pozicija!");
-        if(colorPawn == Color.WHITE) {
+        if(colorPawn == ChessPiece.Color.WHITE) {
             if(temp1 == temp3 && temp2 == 52 && temp4 == 50){
                 position = pozicija;
             }
@@ -45,7 +45,7 @@ public class Pawn extends ChessPiece{
             }
             else throw new IllegalChessMoveException("Netačna pozicija!");
         }
-        if(colorPawn == Color.BLACK){
+        if(colorPawn == ChessPiece.Color.BLACK){
             if(temp1 == temp3 && temp2 == 55 && temp4 == 53){
                 position = pozicija;
             }
@@ -57,5 +57,10 @@ public class Pawn extends ChessPiece{
             }
             else throw new IllegalChessMoveException("Netačna pozicija!");
         }
+    }
+
+    @Override
+    public String toString () {
+        return getColor() + " " + getPosition();
     }
 }

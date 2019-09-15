@@ -5,7 +5,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Board {
 
-    //public List<ChessPiece> lista = new ArrayList<ChessPiece>();
     public ArrayList<ChessPiece> lista = new ArrayList<>();
 
     public Board() {
@@ -54,114 +53,137 @@ public class Board {
     }
 
     public boolean jeLiPutSlobodan(String oldPosition, String newPosition){
-        String pomocni = new String("");
-        int staraPozicija1 = oldPosition.charAt(0);
-        int staraPozicija2 = oldPosition.charAt(1);
-        int novaPozicija1 = newPosition.charAt(0);
-        int novaPozicija2 = newPosition.charAt(1);
-
-        if(oldPosition.charAt(0) == newPosition.charAt(0)){
-            int temp1 = oldPosition.charAt(1);
-            int temp2 = newPosition.charAt(1);
-            int temp3 = oldPosition.charAt(0);
-            int temp4 = oldPosition.charAt(1);
-            int temp5 = newPosition.charAt(1);
-            temp5++;
+        String pomocni = "";
+        char staraPozicija1 = oldPosition.charAt(0);
+        char staraPozicija2 = oldPosition.charAt(1);
+        char novaPozicija1 = newPosition.charAt(0);
+        char novaPozicija2 = newPosition.charAt(1);
+        int br = 0;
+        if (staraPozicija1 == novaPozicija1) {
+            char temp1 = staraPozicija1;
+            char temp2 = staraPozicija2;
+            temp2++;
+            while (temp2 != novaPozicija2) {
+                pomocni += staraPozicija1;
+                pomocni += temp2;
+                for (ChessPiece c : lista) {
+                    if (c.getPosition().equals(pomocni)) {
+                        return false;
+                    }
+                }
+                if (br == 6) {
+                    return false;
+                }
+                temp2++;
+                pomocni = "";
+                br++;
+            }
+        } else if (staraPozicija2 == novaPozicija2) {
+            char temp1 = staraPozicija1;
+            char temp2 = staraPozicija2;
             temp1++;
-            char pom1 = (char) temp3;
-            char pom2 = (char) temp1;
-            char pom5 = (char) temp5;
-            if(temp2 > temp1) {
-                while (temp2 > temp1) {
-                    pomocni += Character.toString(pom1);
-                    pomocni += Character.toString(pom2);
-                    for(ChessPiece c : lista){
-                        if(c.getPosition().equals(pomocni))
-                            return false;
+            while (temp1 != novaPozicija1) {
+                pomocni += temp1;
+                pomocni += staraPozicija2;
+                for (ChessPiece c : lista) {
+                    if (c.getPosition().equals(pomocni)) {
+                        return false;
                     }
-
+                }
+                if (br == 6) {
+                    return false;
+                }
+                temp1++;
+                pomocni = "";
+                br++;
+            }
+        } else {
+            if (novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2) {
+                char temp1 = staraPozicija1;
+                char temp2 = staraPozicija2;
+                temp1++;
+                temp2++;
+                while (temp1 != novaPozicija1 && temp2 != novaPozicija2) {
+                    pomocni += temp1;
+                    pomocni += temp2;
+                    for (ChessPiece c : lista) {
+                        if (c.getPosition().equals(pomocni)) {
+                            return false;
+                        }
+                    }
+                    if (br == 6) {
+                        return false;
+                    }
                     temp1++;
+                    temp2++;
+                    pomocni = "";
+                    br++;
+                }
+            } else if (novaPozicija1 < staraPozicija1 && novaPozicija2 > staraPozicija2) {
+                char temp1 = staraPozicija1;
+                char temp2 = staraPozicija2;
+                temp1--;
+                temp2++;
+                while (temp1 != novaPozicija1 && temp2 != novaPozicija2) {
+                    pomocni += temp1;
+                    pomocni += temp2;
+                    for (ChessPiece c : lista) {
+                        if (c.getPosition().equals(pomocni)) {
+                            return false;
+                        }
+                    }
+                    if (br == 6) {
+                        return false;
+                    }
+                    temp1--;
+                    temp2++;
+                    pomocni = "";
+                    br++;
+                }
+            } else if (novaPozicija1 > staraPozicija1 && novaPozicija2 < staraPozicija2) {
+                char temp1 = staraPozicija1;
+                char temp2 = staraPozicija2;
+                temp1--;
+                temp2++;
+                while (temp1 != novaPozicija1 && temp2 != novaPozicija2) {
+                    pomocni += temp1;
+                    pomocni += temp2;
+                    for (ChessPiece c : lista) {
+                        if (c.getPosition().equals(pomocni)) {
+                            return false;
+                        }
+                    }
+                    if (br == 6) {
+                        return false;
+                    }
+                    temp1++;
+                    temp2--;
+                    pomocni = "";
+                    br++;
+                }
+            } else {
+                char temp1 = staraPozicija1;
+                char temp2 = staraPozicija2;
+                temp1--;
+                temp2--;
+                while (temp1 != novaPozicija1 && temp2 != novaPozicija2) {
+                    pomocni += temp1;
+                    pomocni += temp2;
+                    for (ChessPiece c : lista) {
+                        if (c.getPosition().equals(pomocni)) {
+                            return false;
+                        }
+                    }
+                    if (br == 6) {
+                        return false;
+                    }
+                    temp1--;
+                    temp2--;
+                    pomocni = "";
+                    br++;
                 }
             }
-            else {
-                while (temp4 > temp5) {
-                    pomocni += Character.toString(pom1);
-                    pomocni += Character.toString(pom5);
-                    for(ChessPiece c : lista){
-                        if(c.getPosition().equals(pomocni))
-                            return false;
-                    }
 
-                    temp5++;
-                }
-            }
-        }
-
-        else if(Math.abs(novaPozicija1 - staraPozicija1) == Math.abs(novaPozicija2 - staraPozicija2)){
-            if(novaPozicija1 > staraPozicija1 && novaPozicija2 < staraPozicija2){
-                staraPozicija1++;
-                staraPozicija2--;
-                char a1 = (char) staraPozicija1;
-                char a2 = (char) staraPozicija2;
-                while(novaPozicija1 > staraPozicija1 && novaPozicija2 < staraPozicija2){
-                    pomocni += Character.toString(a1);
-                    pomocni += Character.toString(a2);
-                    for(ChessPiece c : lista){
-                        if(c.getPosition().equals(pomocni))
-                            return false;
-                    }
-                    staraPozicija1++;
-                    staraPozicija2--;
-                }
-            }
-            else if(novaPozicija1 < staraPozicija1 && novaPozicija2 < staraPozicija2){
-                staraPozicija1--;
-                staraPozicija2--;
-                char a1 = (char) staraPozicija1;
-                char a2 = (char) staraPozicija2;
-                while(novaPozicija1 < staraPozicija1 && novaPozicija2 < staraPozicija2){
-                    pomocni += Character.toString(a1);
-                    pomocni += Character.toString(a2);
-                    for(ChessPiece c : lista){
-                        if(c.getPosition().equals(pomocni))
-                            return false;
-                    }
-                    staraPozicija1--;
-                    staraPozicija2--;
-                }
-            }
-            else if(novaPozicija1 < staraPozicija1 && novaPozicija2 > staraPozicija2){
-                staraPozicija1--;
-                staraPozicija2++;
-                char a1 = (char) staraPozicija1;
-                char a2 = (char) staraPozicija2;
-                while(novaPozicija1 < staraPozicija1 && novaPozicija2 > staraPozicija2){
-                    pomocni += Character.toString(a1);
-                    pomocni += Character.toString(a2);
-                    for(ChessPiece c : lista){
-                        if(c.getPosition().equals(pomocni))
-                            return false;
-                    }
-                    staraPozicija1--;
-                    staraPozicija2++;
-                }
-            }
-            else if(novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2){
-                staraPozicija1++;
-                staraPozicija2++;
-                char a1 = (char) staraPozicija1;
-                char a2 = (char) staraPozicija2;
-                while(novaPozicija1 > staraPozicija1 && novaPozicija2 > staraPozicija2){
-                    pomocni += Character.toString(a1);
-                    pomocni += Character.toString(a2);
-                    for(ChessPiece c : lista){
-                        if(c.getPosition().equals(pomocni))
-                            return false;
-                    }
-                    staraPozicija1++;
-                    staraPozicija2++;
-                }
-            }
         }
         return true;
     }
@@ -182,11 +204,15 @@ public class Board {
     }
 
     public boolean isCheck(ChessPiece.Color boja) {
-        String pomocni = new String("");
+        String pomocni = "";
         for(ChessPiece c : lista){
             if(c instanceof King && c.getColor().equals(boja)){
                 pomocni = c.getPosition();
             }
+        }
+
+        for (ChessPiece chessPiece : lista) {
+
         }
 
         int brojac = 0;
@@ -203,8 +229,24 @@ public class Board {
         return true;
     }
 
-    public void move(Class type, ChessPiece.Color boja, String pozicija){
-
+    public void move(Class type, ChessPiece.Color boja, String pozicija) throws IllegalChessMoveException {
+        int temp = 0;
+        String position = "";
+        for (ChessPiece chessPiece : lista) {
+            if (chessPiece.getClass().equals(type) && chessPiece.getColor() == boja && jeLiPutSlobodan(chessPiece.getPosition(), pozicija)) {
+                position = chessPiece.getPosition();
+                try {
+                    chessPiece.move(pozicija);
+                } catch (IllegalChessMoveException e) {
+                    continue;
+                }
+                if (!chessPiece.getPosition().equals(position) ) {
+                    temp = 1;
+                    break;
+                }
+            }
+        }
+        if (temp == 0) throw new IllegalChessMoveException("Nemoguć potez!");
 
     }
 
@@ -223,12 +265,12 @@ public class Board {
 
                     }
                     c.move(newPosition);
+                    break;
                 }
 
             }
+        } else throw new IllegalChessMoveException("Netačna pozicija!");
 
-        }
-        else throw new IllegalChessMoveException("Netačna pozicija!");
         lista.removeAll(removeList);
         /*for(ChessPiece c : lista){
             if(c.getPosition().equals(oldPosition)){
